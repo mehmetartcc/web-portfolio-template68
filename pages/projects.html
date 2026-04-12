@@ -1,206 +1,112 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeler - Modern Portfolyo Sitesi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mehmet Artuç - Beceriler" />
+  <meta name="keywords" content="portfolio, web geliştirici, HTML, CSS, JavaScript" />
+  <meta name="author" content="Mehmet Artuç" />
+  <meta name="theme-color" content="#dc2626" />
+  
+  <title>Mehmet Artuç | Beceriler</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">P</div>
-                <span>Portfolio</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Ana Sayfa</a></li>
-                <li><a href="projects.html" class="active">Projeler</a></li>
-                <li><a href="about.html">Hakkında</a></li>
-                <li><a href="contact.html">İletişim</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">MA<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Anasayfa</a></li>
+        <li><a href="hakkimda.html" class="nav-link">Hakkımda</a></li>
+        <li><a href="beceriler.html" class="nav-link active">Beceriler</a></li>
+        <li><a href="iletisim.html" class="nav-link">İletişim</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="skills section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Yeteneklerim</span>
+        <h2 class="section-title">Beceriler</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-card" data-aos="zoom-in">
+          <div class="skill-icon html">
+            <i class="fa-brands fa-html5"></i>
+          </div>
+          <h3 class="skill-name">HTML5</h3>
+          <p class="skill-desc">Semantik HTML yapısı, erişilebilir ve SEO uyumlu sayfa iskeletleri oluşturma.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="80">
+              <div class="skill-fill"></div>
+            </div>
+            <span class="skill-percent">80%</span>
+          </div>
         </div>
-    </nav>
 
-    <!-- Header -->
-    <section class="page-header">
-        <h1>Projelerim</h1>
-        <p>Tasarladığım ve geliştirdiğim çeşitli web uygulamaları ve projeleri burada görebilirsiniz.</p>
-    </section>
-
-    <!-- Filter -->
-    <section class="filter-section">
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterProjects('all')">Tümü</button>
-            <button class="filter-btn" onclick="filterProjects('web')">Web Uygulaması</button>
-            <button class="filter-btn" onclick="filterProjects('dashboard')">Dashboard</button>
-            <button class="filter-btn" onclick="filterProjects('website')">Website</button>
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="skill-icon css">
+            <i class="fa-brands fa-css3-alt"></i>
+          </div>
+          <h3 class="skill-name">CSS3</h3>
+          <p class="skill-desc">Flexbox, Grid, animasyonlar ve responsive tasarım ile modern arayüzler.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="75">
+              <div class="skill-fill"></div>
+            </div>
+            <span class="skill-percent">75%</span>
+          </div>
         </div>
-    </section>
 
-    <!-- Projects Grid -->
-    <section class="projects-section">
-        <div class="projects-grid">
-            <div class="project-card" data-category="web">
-                <div class="project-image" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">🛒</div>
-                <div class="project-content">
-                    <h3>E-Commerce Platform</h3>
-                    <p>Tam işlevli e-ticaret platformu, ödeme entegrasyonu ve envanter yönetimi</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
-                        <span class="tag">Stripe</span>
-                    </div>
-                </div>
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="skill-icon js">
+            <i class="fa-brands fa-js"></i>
+          </div>
+          <h3 class="skill-name">JavaScript</h3>
+          <p class="skill-desc">DOM manipülasyonu, etkinlik yönetimi ve dinamik web sayfası geliştirme.</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-level="65">
+              <div class="skill-fill"></div>
             </div>
-
-            <div class="project-card" data-category="web">
-                <div class="project-image" style="background: linear-gradient(135deg, #A855F7, #D946EF);">✅</div>
-                <div class="project-content">
-                    <h3>Task Management App</h3>
-                    <p>Görev yönetimi, işbirliği ve gerçek zamanlı bildirimler</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">Tailwind</span>
-                        <span class="tag">Realtime</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="dashboard">
-                <div class="project-image" style="background: linear-gradient(135deg, #10B981, #34D399);">📊</div>
-                <div class="project-content">
-                    <h3>Analytics Dashboard</h3>
-                    <p>Gerçek zamanlı veri analiz panosu ve raporlama</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">D3.js</span>
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">Charts</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="web">
-                <div class="project-image" style="background: linear-gradient(135deg, #EC4899, #F472B6);">👥</div>
-                <div class="project-content">
-                    <h3>Social Media App</h3>
-                    <p>Sosyal medya platformu, post paylaşımı ve takip sistemi</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">GraphQL</span>
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">WebSocket</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="website">
-                <div class="project-image" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">🎨</div>
-                <div class="project-content">
-                    <h3>Portfolio Website</h3>
-                    <p>Kişisel portfolyo sitesi, animasyonlar ve interaktif öğeler</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Tailwind</span>
-                        <span class="tag">Framer Motion</span>
-                        <span class="tag">TypeScript</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="dashboard">
-                <div class="project-image" style="background: linear-gradient(135deg, #6366F1, #818CF8);">📝</div>
-                <div class="project-content">
-                    <h3>CMS Platform</h3>
-                    <p>İçerik yönetim sistemi, medya kütüphanesi ve yayın planlama</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Express</span>
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">AWS S3</span>
-                    </div>
-                </div>
-            </div>
+            <span class="skill-percent">65%</span>
+          </div>
         </div>
-    </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stat-card">
-            <div class="stat-number">10+</div>
-            <p>Tamamlanan Proje</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo">MA<span class="dot">.</span></p>
+        <p class="footer-copy">&copy; 2025 Mehmet Artuç. Tüm hakları saklıdır.</p>
+        <div class="footer-socials">
+          <a href="https://github.com/mehmetartcc" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="mailto:mehmetartuc2006@gmail.com" aria-label="E-posta"><i class="fa-solid fa-envelope"></i></a>
+          <a href="tel:+905523386811" aria-label="Telefon"><i class="fa-solid fa-phone"></i></a>
         </div>
-        <div class="stat-card">
-            <div class="stat-number">30+</div>
-            <p>Mutlu Müşteri</p>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">2+</div>
-            <p>Yıl Deneyim</p>
-        </div>
-    </section>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Portfolio</h3>
-                <p>Modern ve estetik portfolyo sitesi. Projelerim ve deneyimlerim hakkında bilgi edinin.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Hızlı Bağlantılar</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="projects.html">Projeler</a></li>
-                    <li><a href="about.html">Hakkında</a></li>
-                    <li><a href="contact.html">İletişim</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Sosyal Medya</h3>
-                <div class="social-links">
-                    <a href="#" class="social-link" title="GitHub">G</a>
-                    <a href="#" class="social-link" title="LinkedIn">L</a>
-                    <a href="#" class="social-link" title="Twitter">T</a>
-                    <a href="#" class="social-link" title="Email">E</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Portfolio. Tüm hakları saklıdır.</p>
-        </div>
-    </footer>
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Yukarı çık">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
-
-    <script src="script.js"></script>
-    <script>
-        function filterProjects(category) {
-            const cards = document.querySelectorAll('.project-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                    card.style.animation = 'slideUp 0.6s ease-out';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
