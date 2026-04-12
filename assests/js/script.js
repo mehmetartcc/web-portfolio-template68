@@ -7,7 +7,6 @@ function toggleMenu() {
         navLinks.style.display = 'flex';
     }
 }
-
 // Scroll to Top Button
 window.addEventListener('scroll', () => {
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
