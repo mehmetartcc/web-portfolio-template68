@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeler - Modern Portfolyo Sitesi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                <span>Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="projects.html" class="active">Projeler</a></li>
+                <li><a href="about.html">Hakkında</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header">
+        <h1>Projelerim</h1>
+        <p>Tasarladığım ve geliştirdiğim çeşitli web uygulamaları ve projeleri burada görebilirsiniz.</p>
+    </section>
+
+    <!-- Filter -->
+    <section class="filter-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProjects('all')">Tümü</button>
+            <button class="filter-btn" onclick="filterProjects('web')">Web Uygulaması</button>
+            <button class="filter-btn" onclick="filterProjects('dashboard')">Dashboard</button>
+            <button class="filter-btn" onclick="filterProjects('website')">Website</button>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-section">
+        <div class="projects-grid">
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">🛒</div>
+                <div class="project-content">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Tam işlevli e-ticaret platformu, ödeme entegrasyonu ve envanter yönetimi</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Stripe</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #A855F7, #D946EF);">✅</div>
+                <div class="project-content">
+                    <h3>Task Management App</h3>
+                    <p>Görev yönetimi, işbirliği ve gerçek zamanlı bildirimler</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Tailwind</span>
+                        <span class="tag">Realtime</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="dashboard">
+                <div class="project-image" style="background: linear-gradient(135deg, #10B981, #34D399);">📊</div>
+                <div class="project-content">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Gerçek zamanlı veri analiz panosu ve raporlama</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">D3.js</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Charts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #EC4899, #F472B6);">👥</div>
+                <div class="project-content">
+                    <h3>Social Media App</h3>
+                    <p>Sosyal medya platformu, post paylaşımı ve takip sistemi</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">WebSocket</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="website">
+                <div class="project-image" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">🎨</div>
+                <div class="project-content">
+                    <h3>Portfolio Website</h3>
+                    <p>Kişisel portfolyo sitesi, animasyonlar ve interaktif öğeler</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Tailwind</span>
+                        <span class="tag">Framer Motion</span>
+                        <span class="tag">TypeScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="dashboard">
+                <div class="project-image" style="background: linear-gradient(135deg, #6366F1, #818CF8);">📝</div>
+                <div class="project-content">
+                    <h3>CMS Platform</h3>
+                    <p>İçerik yönetim sistemi, medya kütüphanesi ve yayın planlama</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">AWS S3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stat-card">
+            <div class="stat-number">10+</div>
+            <p>Tamamlanan Proje</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">30+</div>
+            <p>Mutlu Müşteri</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">2+</div>
+            <p>Yıl Deneyim</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio</h3>
+                <p>Modern ve estetik portfolyo sitesi. Projelerim ve deneyimlerim hakkında bilgi edinin.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="projects.html">Projeler</a></li>
+                    <li><a href="about.html">Hakkında</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="GitHub">G</a>
+                    <a href="#" class="social-link" title="LinkedIn">L</a>
+                    <a href="#" class="social-link" title="Twitter">T</a>
+                    <a href="#" class="social-link" title="Email">E</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Portfolio. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <script src="script.js"></script>
+    <script>
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'slideUp 0.6s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

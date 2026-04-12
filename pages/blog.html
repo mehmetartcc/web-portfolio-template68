@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Modern Portfolyo Sitesi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                <span>Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="projects.html">Projeler</a></li>
+                <li><a href="about.html">Hakkında</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header">
+        <h1>Blog</h1>
+        <p>Web geliştirme, tasarım ve teknoloji hakkında yazılar ve ipuçları.</p>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Blog yazılarında ara..." class="search-input" onkeyup="searchBlog()">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterBlog('all')">Tümü</button>
+                <button class="filter-btn" onclick="filterBlog('react')">React</button>
+                <button class="filter-btn" onclick="filterBlog('css')">CSS</button>
+                <button class="filter-btn" onclick="filterBlog('javascript')">JavaScript</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-section">
+        <div class="blog-grid">
+            <!-- Blog Post 1 -->
+            <article class="blog-card" data-category="react">
+                <div class="blog-image" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">📝</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">📅 2024-03-15</span>
+                        <span class="blog-time">⏱️ 5 min</span>
+                    </div>
+                    <h3>React 19 ile Modern Web Geliştirme</h3>
+                    <p>React 19'un yeni özellikleri, Server Components ve Suspense API'nin nasıl kullanılacağını öğrenin. Modern web uygulamaları geliştirmek için gereken tüm bilgiler.</p>
+                    <div class="blog-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Tutorial</span>
+                    </div>
+                    <a href="#" class="read-more">Devamını Oku →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-card" data-category="css">
+                <div class="blog-image" style="background: linear-gradient(135deg, #A855F7, #D946EF);">🎨</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">📅 2024-03-10</span>
+                        <span class="blog-time">⏱️ 7 min</span>
+                    </div>
+                    <h3>Tailwind CSS ile Responsive Tasarım</h3>
+                    <p>Tailwind CSS kullanarak responsive ve modern tasarımlar oluşturun. Utility-first yaklaşımı, custom configuration ve best practices hakkında detaylı rehber.</p>
+                    <div class="blog-tags">
+                        <span class="tag">CSS</span>
+                        <span class="tag">Tailwind</span>
+                        <span class="tag">Design</span>
+                    </div>
+                    <a href="#" class="read-more">Devamını Oku →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 3 -->
+            <article class="blog-card" data-category="javascript">
+                <div class="blog-image" style="background: linear-gradient(135deg, #10B981, #34D399);">✍️</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">📅 2024-03-05</span>
+                        <span class="blog-time">⏱️ 8 min</span>
+                    </div>
+                    <h3>TypeScript Best Practices</h3>
+                    <p>TypeScript ile yazılan kodun kalitesini ve güvenliğini artırın. Type safety, interfaces, generics ve advanced patterns hakkında kapsamlı bir rehber.</p>
+                    <div class="blog-tags">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Best Practices</span>
+                    </div>
+                    <a href="#" class="read-more">Devamını Oku →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 4 -->
+            <article class="blog-card" data-category="react">
+                <div class="blog-image" style="background: linear-gradient(135deg, #EC4899, #F472B6);">🚀</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">📅 2024-02-28</span>
+                        <span class="blog-time">⏱️ 6 min</span>
+                    </div>
+                    <h3>Next.js ile Full-Stack Geliştirme</h3>
+                    <p>Next.js ile full-stack web uygulamaları geliştirin. API routes, SSR, SSG ve ISR hakkında detaylı bilgiler ve pratik örnekler.</p>
+                    <div class="blog-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Full-Stack</span>
+                    </div>
+                    <a href="#" class="read-more">Devamını Oku →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 5 -->
+            <article class="blog-card" data-category="css">
+                <div class="blog-image" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">🎭</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">📅 2024-02-20</span>
+                        <span class="blog-time">⏱️ 5 min</span>
+                    </div>
+                    <h3>CSS Animasyonlar ve Transitions</h3>
+                    <p>CSS animasyonlar ve transitions kullanarak etkileyici kullanıcı deneyimleri oluşturun. Keyframes, easing functions ve performance optimization.</p>
+                    <div class="blog-tags">
+                        <span class="tag">CSS</span>
+                        <span class="tag">Animation</span>
+                        <span class="tag">UX</span>
+                    </div>
+                    <a href="#" class="read-more">Devamını Oku →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 6 -->
+            <article class="blog-card" data-category="javascript">
+                <div class="blog-image" style="background: linear-gradient(135deg, #6366F1, #818CF8);">⚙️</div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">📅 2024-02-15</span>
+                        <span class="blog-time">⏱️ 9 min</span>
+                    </div>
+                    <h3>JavaScript Async/Await Rehberi</h3>
+                    <p>JavaScript'te asynchronous programlama. Promises, async/await, error handling ve real-world örnekler ile detaylı bir rehber.</p>
+                    <div class="blog-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Async</span>
+                        <span class="tag">Tutorial</span>
+                    </div>
+                    <a href="#" class="read-more">Devamını Oku →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2>Newsletter'a Abone Olun</h2>
+        <p>En yeni blog yazılarını ve teknoloji haberlerini doğrudan e-postanıza alın.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+            <input type="email" placeholder="E-posta adresiniz..." required>
+            <button type="submit" class="btn btn-primary">Abone Ol</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio</h3>
+                <p>Modern ve estetik portfolyo sitesi. Projelerim ve deneyimlerim hakkında bilgi edinin.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="projects.html">Projeler</a></li>
+                    <li><a href="about.html">Hakkında</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="GitHub">G</a>
+                    <a href="#" class="social-link" title="LinkedIn">L</a>
+                    <a href="#" class="social-link" title="Twitter">T</a>
+                    <a href="#" class="social-link" title="Email">E</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Portfolio. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <script src="script.js"></script>
+    <script>
+        function filterBlog(category) {
+            const cards = document.querySelectorAll('.blog-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'slideUp 0.6s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchBlog() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.blog-card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function handleNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            alert(`Teşekkür ederiz! ${email} adresine newsletter gönderilecek.`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

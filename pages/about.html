@@ -1,1 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkında - Modern Portfolyo Sitesi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                <span>Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="projects.html">Projeler</a></li>
+                <li><a href="about.html" class="active">Hakkında</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
 
+    <!-- Header -->
+    <section class="page-header">
+        <h1>Hakkında</h1>
+        <p>Web geliştirme ve tasarım alanında 2+ yıl deneyime sahip, modern teknolojileri kullanarak yaratıcı çözümler sunan bir developer.</p>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="bio-section">
+        <div class="bio-content">
+            <div class="bio-text">
+                <h2>Kim Olduğum</h2>
+                <p>Merhaba! Ben bir web developer ve tasarımcıyım. Teknoloji ve yaratıcılığın kesişim noktasında çalışmayı seviyorum. Her proje için benzersiz çözümler tasarlarım ve geliştiririm.</p>
+                <p>Kullanıcı deneyimini ön planda tutarak, modern teknolojiler ve best practices kullanarak web uygulamaları geliştiriyorum. Takım çalışmasına inanıyor ve açık iletişimi destekliyorum.</p>
+                <p>Boş zamanlarımda yeni teknolojiler öğreniyor, açık kaynak projelere katkıda bulunuyor ve yazı yazıyorum.</p>
+            </div>
+            <div class="bio-stats">
+                <div class="stat-box">
+                    <div class="stat-number">10+</div>
+                    <p>Proje</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">30+</div>
+                    <p>Müşteri</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">2+</div>
+                    <p>Yıl Deneyim</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <p>Memnuniyet</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <h2 class="section-title">Yeteneklerim</h2>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <h3>Frontend</h3>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>React</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>TypeScript</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Tailwind CSS</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Next.js</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>Backend</h3>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Node.js</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Express</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Python</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>PostgreSQL</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>Tools</h3>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Git</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Docker</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>AWS</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Figma</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h3>Soft Skills</h3>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Problem Solving</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Communication</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Leadership</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-dot"></span>
+                    <span>Teamwork</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <h2 class="section-title">Deneyim</h2>
+        <div class="experience-list">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Senior Frontend Developer</h3>
+                        <p class="company">Tech Company</p>
+                    </div>
+                    <span class="period">2022 - Present</span>
+                </div>
+                <p class="description">React ve TypeScript kullanarak modern web uygulamaları geliştirme</p>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Full Stack Developer</h3>
+                        <p class="company">Digital Agency</p>
+                    </div>
+                    <span class="period">2020 - 2022</span>
+                </div>
+                <p class="description">Frontend ve backend geliştirme, API tasarımı ve veritabanı yönetimi</p>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Junior Developer</h3>
+                        <p class="company">Startup</p>
+                    </div>
+                    <span class="period">2018 - 2020</span>
+                </div>
+                <p class="description">Web uygulamaları geliştirme ve bug fixing</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section">
+        <h2 class="section-title">Eğitim</h2>
+        <div class="education-list">
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3>Bachelor of Science in Computer Science</h3>
+                        <p>University Name</p>
+                    </div>
+                    <span class="year">2018</span>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3>Web Development Bootcamp</h3>
+                        <p>Code Academy</p>
+                    </div>
+                    <span class="year">2017</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio</h3>
+                <p>Modern ve estetik portfolyo sitesi. Projelerim ve deneyimlerim hakkında bilgi edinin.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="projects.html">Projeler</a></li>
+                    <li><a href="about.html">Hakkında</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="GitHub">G</a>
+                    <a href="#" class="social-link" title="LinkedIn">L</a>
+                    <a href="#" class="social-link" title="Twitter">T</a>
+                    <a href="#" class="social-link" title="Email">E</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Portfolio. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
