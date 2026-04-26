@@ -5,21 +5,26 @@
 // Dark Mode Fonksiyonu
 function toggleDarkMode() {
     const body = document.body;
+    const btn = document.querySelector('.theme-toggle');
     body.classList.toggle('dark-mode');
     
-    // Local Storage'a kaydet
+    // Simgeyi değiştir
     if (body.classList.contains('dark-mode')) {
+        btn.textContent = '☀️';
         localStorage.setItem('darkMode', 'enabled');
     } else {
+        btn.textContent = '🌓';
         localStorage.setItem('darkMode', 'disabled');
     }
-} 
+}
 
 // Sayfa yüklendiğinde dark mode durumunu kontrol et
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeStatus = localStorage.getItem('darkMode');
+    const btn = document.querySelector('.theme-toggle');
     if (darkModeStatus === 'enabled') {
         document.body.classList.add('dark-mode');
+        if (btn) btn.textContent = '☀️';
     }
 });
 
