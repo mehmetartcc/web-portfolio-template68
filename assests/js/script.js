@@ -13,7 +13,7 @@ function toggleDarkMode() {
     } else {
         localStorage.setItem('darkMode', 'disabled');
     }
-}
+} 
 
 // Sayfa yüklendiğinde dark mode durumunu kontrol et
 document.addEventListener('DOMContentLoaded', () => {
