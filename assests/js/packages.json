@@ -1,0 +1,74 @@
+{
+  "paketler": [
+    {
+      "id": 1,
+      "ad": "Başlangıç Paketi",
+      "fiyat": 199,
+      "para": "₺",
+      "sure": "4 Hafta",
+      "icon": "🚀",
+      "aciklama": "Web geliştirmeye başlayanlar için ideal",
+      "ozellikler": [
+        "HTML5 & CSS3 Temelleri",
+        "JavaScript Başlangıç",
+        "Responsive Tasarım",
+        "3 Mini Proje"
+      ],
+      "renk": "#3B82F6"
+    },
+    {
+      "id": 2,
+      "ad": "Orta Seviye Paketi",
+      "fiyat": 399,
+      "para": "₺",
+      "sure": "8 Hafta",
+      "icon": "⭐",
+      "aciklama": "Profesyonel web geliştirici olmak için",
+      "ozellikler": [
+        "React Temelleri",
+        "API Entegrasyonu",
+        "State Management",
+        "5 Gerçek Proje",
+        "GitHub Kullanımı"
+      ],
+      "renk": "#8B5CF6"
+    },
+    {
+      "id": 3,
+      "ad": "İleri Seviye Paketi",
+      "fiyat": 699,
+      "para": "₺",
+      "sure": "12 Hafta",
+      "icon": "💎",
+      "aciklama": "Full-Stack geliştirici olmak için",
+      "ozellikler": [
+        "React Advanced",
+        "Node.js & Express",
+        "MongoDB Veritabanı",
+        "Deployment",
+        "10+ Gerçek Proje",
+        "1-on-1 Mentoring"
+      ],
+      "renk": "#EC4899"
+    },
+    {
+      "id": 4,
+      "ad": "Uzman Paketi",
+      "fiyat": 999,
+      "para": "₺",
+      "sure": "16 Hafta",
+      "icon": "👑",
+      "aciklama": "Endüstri standardında beceriler",
+      "ozellikler": [
+        "Full-Stack Mastery",
+        "TypeScript",
+        "Docker & Kubernetes",
+        "Microservices",
+        "15+ Portföy Projesi",
+        "Sertifikasyon",
+        "Kariyer Danışmanlığı"
+      ],
+      "renk": "#F59E0B"
+    }
+  ]
+}
