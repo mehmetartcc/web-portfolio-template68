@@ -8,6 +8,39 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .project-buttons button {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .fav-btn {
+            border: 2px solid #ddd;
+            background: white;
+            color: #333;
+        }
+        .fav-btn.active {
+            background: #EC4899;
+            color: white;
+            border-color: #EC4899;
+        }
+        .cart-btn {
+            background: #2563EB;
+            color: white;
+        }
+        .cart-btn.active {
+            background: #10B981;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -25,6 +58,12 @@
                 <li><a href="blog.html">Blog</a></li>
             </ul>
             <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="favorites.html" style="position: relative; background: #EC4899; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    ❤️ Favoriler <span id="fav-count" style="display: none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; background: #10B981; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    🛒 Sepet <span id="cart-count" style="display: none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
                 <button class="theme-toggle" onclick="toggleDarkMode()" title="Karanlık/Aydınlık Mod Değiştir">🌓</button>
                 <button class="mobile-menu" onclick="toggleMenu()">☰</button>
             </div>
@@ -50,6 +89,7 @@
     <!-- Projects Grid -->
     <section class="projects-section">
         <div class="projects-grid">
+            <!-- Proje 1 -->
             <div class="project-card" data-category="web">
                 <div class="project-image" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">🛒</div>
                 <div class="project-content">
@@ -61,9 +101,14 @@
                         <span class="tag">MongoDB</span>
                         <span class="tag">Stripe</span>
                     </div>
+                    <div class="project-buttons">
+                        <button class="fav-btn" id="fav-1" onclick="addToFavorites(1, 'E-Commerce Platform', 1999)">🤍 Favorilere</button>
+                        <button class="cart-btn" id="cart-1" onclick="addToCart(1, 'E-Commerce Platform', 1999)">🛒 Sepete</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Proje 2 -->
             <div class="project-card" data-category="web">
                 <div class="project-image" style="background: linear-gradient(135deg, #A855F7, #D946EF);">✅</div>
                 <div class="project-content">
@@ -75,9 +120,14 @@
                         <span class="tag">Tailwind</span>
                         <span class="tag">Realtime</span>
                     </div>
+                    <div class="project-buttons">
+                        <button class="fav-btn" id="fav-2" onclick="addToFavorites(2, 'Task Management App', 899)">🤍 Favorilere</button>
+                        <button class="cart-btn" id="cart-2" onclick="addToCart(2, 'Task Management App', 899)">🛒 Sepete</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Proje 3 -->
             <div class="project-card" data-category="dashboard">
                 <div class="project-image" style="background: linear-gradient(135deg, #10B981, #34D399);">📊</div>
                 <div class="project-content">
@@ -89,9 +139,14 @@
                         <span class="tag">TypeScript</span>
                         <span class="tag">Charts</span>
                     </div>
+                    <div class="project-buttons">
+                        <button class="fav-btn" id="fav-3" onclick="addToFavorites(3, 'Analytics Dashboard', 1299)">🤍 Favorilere</button>
+                        <button class="cart-btn" id="cart-3" onclick="addToCart(3, 'Analytics Dashboard', 1299)">🛒 Sepete</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Proje 4 -->
             <div class="project-card" data-category="web">
                 <div class="project-image" style="background: linear-gradient(135deg, #EC4899, #F472B6);">👥</div>
                 <div class="project-content">
@@ -103,9 +158,14 @@
                         <span class="tag">PostgreSQL</span>
                         <span class="tag">WebSocket</span>
                     </div>
+                    <div class="project-buttons">
+                        <button class="fav-btn" id="fav-4" onclick="addToFavorites(4, 'Social Media App', 1599)">🤍 Favorilere</button>
+                        <button class="cart-btn" id="cart-4" onclick="addToCart(4, 'Social Media App', 1599)">🛒 Sepete</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Proje 5 -->
             <div class="project-card" data-category="website">
                 <div class="project-image" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">🎨</div>
                 <div class="project-content">
@@ -117,9 +177,14 @@
                         <span class="tag">Framer Motion</span>
                         <span class="tag">TypeScript</span>
                     </div>
+                    <div class="project-buttons">
+                        <button class="fav-btn" id="fav-5" onclick="addToFavorites(5, 'Portfolio Website', 699)">🤍 Favorilere</button>
+                        <button class="cart-btn" id="cart-5" onclick="addToCart(5, 'Portfolio Website', 699)">🛒 Sepete</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Proje 6 -->
             <div class="project-card" data-category="dashboard">
                 <div class="project-image" style="background: linear-gradient(135deg, #6366F1, #818CF8);">📝</div>
                 <div class="project-content">
@@ -130,6 +195,10 @@
                         <span class="tag">Express</span>
                         <span class="tag">PostgreSQL</span>
                         <span class="tag">AWS S3</span>
+                    </div>
+                    <div class="project-buttons">
+                        <button class="fav-btn" id="fav-6" onclick="addToFavorites(6, 'CMS Platform', 1799)">🤍 Favorilere</button>
+                        <button class="cart-btn" id="cart-6" onclick="addToCart(6, 'CMS Platform', 1799)">🛒 Sepete</button>
                     </div>
                 </div>
             </div>
@@ -144,7 +213,7 @@
         </div>
         <div class="stat-card">
             <div class="stat-number">30+</div>
-            <p>Mutlu Müşteri</p>
+            <p>Memnun Müşteri</p>
         </div>
         <div class="stat-card">
             <div class="stat-number">5+</div>
@@ -153,11 +222,11 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Portfolio</h3>
-                <p>Modern ve estetik portfolyo sitesi. Projelerim ve deneyimlerim hakkında bilgi edinin.</p>
+                <p>Mehmet Artuç - Bilgisayar Programcılığı Öğrencisi</p>
             </div>
             <div class="footer-section">
                 <h3>Hızlı Bağlantılar</h3>
@@ -179,7 +248,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Portfolio. Tüm hakları saklıdır.</p>
+            <p>&copy; 2026 Mehmet Artuç. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 
@@ -188,6 +257,99 @@
 
     <script src="script.js"></script>
     <script>
+        // ============================================
+        // PROJELER - Favorilere Ekle ve Sepete Ekle
+        // ============================================
+
+        let projectFavorites = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+        let projectCart = JSON.parse(localStorage.getItem('projectCart')) || [];
+
+        const projects = [
+            {id: 1, name: 'E-Commerce Platform', price: 1999},
+            {id: 2, name: 'Task Management App', price: 899},
+            {id: 3, name: 'Analytics Dashboard', price: 1299},
+            {id: 4, name: 'Social Media App', price: 1599},
+            {id: 5, name: 'Portfolio Website', price: 699},
+            {id: 6, name: 'CMS Platform', price: 1799}
+        ];
+
+        function addToFavorites(id, name, price) {
+            const index = projectFavorites.findIndex(p => p.id === id);
+            if (index === -1) {
+                projectFavorites.push({id, name, price});
+                localStorage.setItem('projectFavorites', JSON.stringify(projectFavorites));
+                const btn = document.getElementById('fav-' + id);
+                if (btn) { btn.classList.add('active'); btn.textContent = '❤️ Favorilerde'; }
+                updateCounts();
+                showToast('❤️ "' + name + '" favorilere eklendi!', 'fav');
+            } else {
+                window.location.href = 'favorites.html';
+            }
+        }
+
+        function addToCart(id, name, price) {
+            const index = projectCart.findIndex(p => p.id === id);
+            if (index === -1) {
+                projectCart.push({id, name, price});
+                localStorage.setItem('projectCart', JSON.stringify(projectCart));
+                const btn = document.getElementById('cart-' + id);
+                if (btn) { btn.classList.add('active'); btn.textContent = '✓ Sepette'; }
+                updateCounts();
+                showToast('🛒 "' + name + '" sepete eklendi!', 'cart');
+            } else {
+                window.location.href = 'cart.html';
+            }
+        }
+
+        function showToast(msg, type) {
+            let toast = document.getElementById('proj-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'proj-toast';
+                toast.style.cssText = 'position:fixed;bottom:2rem;right:2rem;padding:1rem 1.5rem;border-radius:10px;color:white;font-weight:600;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.3s ease;max-width:320px;font-family:inherit;';
+                document.body.appendChild(toast);
+            }
+            toast.style.background = type === 'fav' ? '#EC4899' : '#10B981';
+            toast.textContent = msg;
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => { toast.style.transform = 'translateY(100px)'; toast.style.opacity = '0'; }, 2500);
+        }
+
+        function updateCounts() {
+            const favCount = document.getElementById('fav-count');
+            const cartCount = document.getElementById('cart-count');
+            
+            favCount.textContent = projectFavorites.length;
+            favCount.style.display = projectFavorites.length > 0 ? 'flex' : 'none';
+            
+            cartCount.textContent = projectCart.length;
+            cartCount.style.display = projectCart.length > 0 ? 'flex' : 'none';
+        }
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounts();
+            
+            // Butonları güncelle
+            projectFavorites.forEach(p => {
+                const btn = document.getElementById('fav-' + p.id);
+                if (btn) {
+                    btn.classList.add('active');
+                    btn.textContent = '❤️ Favorilerde';
+                }
+            });
+            
+            projectCart.forEach(p => {
+                const btn = document.getElementById('cart-' + p.id);
+                if (btn) {
+                    btn.classList.add('active');
+                    btn.textContent = '✓ Sepette';
+                }
+            });
+        });
+
         function filterProjects(category) {
             const cards = document.querySelectorAll('.project-card');
             const buttons = document.querySelectorAll('.filter-btn');

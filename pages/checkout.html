@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme - Modern Portfolyo Sitesi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .checkout-header {
+            padding: 8rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, #2563EB 0%, #60A5FA 100%);
+            color: white;
+        }
+        .checkout-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .checkout-header p { opacity: 0.9; font-size: 1.1rem; }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            max-width: 600px;
+            margin: 2.5rem auto 0;
+            padding: 0 2rem;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .step.active { color: white; }
+        .step-num {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .step.active .step-num { background: white; color: #2563EB; }
+        .step.done .step-num { background: #10B981; color: white; }
+        .step.done { color: rgba(255,255,255,0.8); }
+        .step-divider {
+            width: 40px; height: 2px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 0.5rem;
+            align-self: center;
+        }
+
+        /* Layout */
+        .checkout-layout {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 2rem;
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .checkout-layout { grid-template-columns: 1fr; }
+            .order-col { order: -1; }
+        }
+
+        /* Form */
+        .checkout-form-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .checkout-form-card h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+        .field { margin-bottom: 1.2rem; }
+        .field label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+        .field input, .field select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--text);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .field input:focus, .field select:focus {
+            border-color: #2563EB;
+        }
+        .field input.error { border-color: #DC2626; }
+
+        /* Card visual */
+        .card-visual {
+            background: linear-gradient(135deg, #1e3a8a, #2563EB);
+            border-radius: 14px;
+            padding: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-visual::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 150px; height: 150px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        .card-visual::after {
+            content: '';
+            position: absolute;
+            bottom: -50px; right: 20px;
+            width: 120px; height: 120px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+        }
+        .card-chip { width: 40px; height: 28px; background: #F59E0B; border-radius: 5px; }
+        .card-number-display { font-size: 1.15rem; letter-spacing: 3px; font-family: monospace; }
+        .card-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+        .card-bottom .label { font-size: 0.65rem; opacity: 0.7; text-transform: uppercase; margin-bottom: 2px; }
+        .card-bottom .value { font-size: 0.9rem; font-weight: 600; }
+        .card-brand { font-size: 1.4rem; font-weight: 800; opacity: 0.9; }
+
+        /* Order summary */
+        .order-summary {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 5rem;
+        }
+        .order-summary h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--text); }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        .order-item:last-of-type { border-bottom: none; }
+        .order-item .item-name { color: var(--text); font-weight: 500; flex: 1; padding-right: 0.5rem; }
+        .order-item .item-price { color: #10B981; font-weight: 700; white-space: nowrap; }
+        .summary-divider { border: none; border-top: 2px solid var(--border); margin: 0.75rem 0; }
+        .summary-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .summary-total-row.grand-total {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-top: 0.5rem;
+        }
+        .summary-total-row.grand-total span:last-child { color: #10B981; font-size: 1.3rem; }
+
+        .btn-pay {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #2563EB, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-top: 1.5rem;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .btn-pay:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-pay:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Success overlay */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .success-overlay.show { display: flex; }
+        .success-modal {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .success-icon { font-size: 5rem; margin-bottom: 1rem; display: block; }
+        .success-modal h2 { font-size: 1.8rem; color: #10B981; margin-bottom: 0.75rem; }
+        .success-modal p { color: var(--text-light); margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .order-number { font-size: 1.1rem; font-weight: 700; color: var(--text); background: var(--bg); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; margin: 0.75rem 0; }
+        .success-actions { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; justify-content: center; }
+        .success-actions a {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+        .success-actions a:hover { opacity: 0.85; }
+        .btn-go-home { background: #10B981; color: white; }
+        .btn-go-projects { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px; height: 20px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                <span>Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="projects.html">Projeler</a></li>
+                <li><a href="about.html">Hakkında</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="favorites.html" style="position: relative; background: #EC4899; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    ❤️ Favoriler <span id="fav-count" style="display:none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; background: #10B981; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    🛒 Sepet <span id="cart-count" style="display:none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Karanlık/Aydınlık Mod">🌓</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="checkout-header">
+        <h1>💳 Ödeme</h1>
+        <p>Güvenli ödeme ile siparişinizi tamamlayın</p>
+        <div class="steps">
+            <div class="step done"><div class="step-num">✓</div><span>Sepet</span></div>
+            <div class="step-divider"></div>
+            <div class="step active"><div class="step-num">2</div><span>Ödeme</span></div>
+            <div class="step-divider"></div>
+            <div class="step"><div class="step-num">3</div><span>Onay</span></div>
+        </div>
+    </div>
+
+    <!-- Checkout Layout -->
+    <div class="checkout-layout" id="checkout-layout"></div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-modal">
+            <span class="success-icon">🎉</span>
+            <h2>Ödeme Başarılı!</h2>
+            <p>Siparişiniz başarıyla oluşturuldu.</p>
+            <div class="order-number" id="order-number">Sipariş #000000</div>
+            <p style="font-size: 0.85rem; color: #10B981;">Fatura bilgileriniz e-posta adresinize gönderildi.</p>
+            <div class="success-actions">
+                <a href="index.html" class="btn-go-home">🏠 Ana Sayfaya Dön</a>
+                <a href="projects.html" class="btn-go-projects">🔍 Projelere Bak</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const projectImages = {
+            1: { bg: 'linear-gradient(135deg, #2563EB, #60A5FA)', emoji: '🛒' },
+            2: { bg: 'linear-gradient(135deg, #A855F7, #D946EF)', emoji: '✅' },
+            3: { bg: 'linear-gradient(135deg, #10B981, #34D399)', emoji: '📊' },
+            4: { bg: 'linear-gradient(135deg, #EC4899, #F472B6)', emoji: '👥' },
+            5: { bg: 'linear-gradient(135deg, #F59E0B, #FBBF24)', emoji: '🎨' },
+            6: { bg: 'linear-gradient(135deg, #6366F1, #818CF8)', emoji: '📝' }
+        };
+
+        function updateBadges() {
+            const favs = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+            const cartItems = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const favCount = document.getElementById('fav-count');
+            const cartCount = document.getElementById('cart-count');
+            favCount.textContent = favs.length;
+            favCount.style.display = favs.length > 0 ? 'flex' : 'none';
+            cartCount.textContent = cartItems.length;
+            cartCount.style.display = cartItems.length > 0 ? 'flex' : 'none';
+        }
+
+        function formatCardNumber(val) {
+            return val.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+        }
+        function formatExpiry(val) {
+            let v = val.replace(/\D/g, '').slice(0, 4);
+            if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+            return v;
+        }
+
+        function updateCardDisplay() {
+            const num = document.getElementById('cardNumber')?.value.replace(/\s/g, '') || '';
+            const name = document.getElementById('cardName')?.value || '';
+            const exp = document.getElementById('expiry')?.value || '';
+            const numDisplay = document.getElementById('cardNumDisplay');
+            const nameDisplay = document.getElementById('cardNameDisplay');
+            const expDisplay = document.getElementById('cardExpDisplay');
+            if (numDisplay) numDisplay.textContent = (num + '****************').slice(0,16).replace(/(.{4})/g, '$1 ').trim();
+            if (nameDisplay) nameDisplay.textContent = name || 'AD SOYAD';
+            if (expDisplay) expDisplay.textContent = exp || 'AA/YY';
+        }
+
+        function validateForm() {
+            let valid = true;
+            const fields = ['firstName', 'lastName', 'email', 'phone', 'cardNumber', 'cardName', 'expiry', 'cvv'];
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (!el.value.trim()) {
+                    el.classList.add('error');
+                    valid = false;
+                } else {
+                    el.classList.remove('error');
+                }
+            });
+            // Extra: email format
+            const emailEl = document.getElementById('email');
+            if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+                emailEl.classList.add('error');
+                valid = false;
+            }
+            return valid;
+        }
+
+        function processPayment() {
+            if (!validateForm()) {
+                alert('Lütfen tüm alanları doldurun.');
+                return;
+            }
+            const btn = document.getElementById('payBtn');
+            const btnText = document.getElementById('payBtnText');
+            const spinner = document.getElementById('paySpinner');
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+
+            setTimeout(() => {
+                const orderNum = 'ORD-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                document.getElementById('order-number').textContent = 'Sipariş #' + orderNum;
+                document.getElementById('success-overlay').classList.add('show');
+                // Clear cart
+                localStorage.setItem('projectCart', JSON.stringify([]));
+                updateBadges();
+            }, 2200);
+        }
+
+        function renderCheckout() {
+            const cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const layout = document.getElementById('checkout-layout');
+            updateBadges();
+
+            if (cart.length === 0) {
+                layout.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding: 5rem 2rem;">
+                        <p style="font-size:1.2rem; margin-bottom:1rem;">Sepetiniz boş, ödeme yapılamaz.</p>
+                        <a href="projects.html" style="color:#2563EB; font-weight:600;">← Projelere Dön</a>
+                    </div>`;
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, p) => sum + p.price, 0);
+            const tax = Math.round(subtotal * 0.18);
+            const total = subtotal + tax;
+
+            const orderItemsHTML = cart.map(p => `
+                <div class="order-item">
+                    <span class="item-name">${p.name}</span>
+                    <span class="item-price">${p.price.toLocaleString('tr-TR')} ₺</span>
+                </div>`).join('');
+
+            layout.innerHTML = `
+                <!-- Form Column -->
+                <div>
+                    <!-- Billing Info -->
+                    <div class="checkout-form-card" style="margin-bottom: 1.5rem;">
+                        <h2>👤 Fatura Bilgileri</h2>
+                        <div class="form-row">
+                            <div class="field">
+                                <label>Ad *</label>
+                                <input type="text" id="firstName" placeholder="Mehmet" oninput="this.classList.remove('error')">
+                            </div>
+                            <div class="field">
+                                <label>Soyad *</label>
+                                <input type="text" id="lastName" placeholder="Artuç" oninput="this.classList.remove('error')">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>E-posta *</label>
+                            <input type="email" id="email" placeholder="ornek@email.com" oninput="this.classList.remove('error')">
+                        </div>
+                        <div class="field">
+                            <label>Telefon *</label>
+                            <input type="tel" id="phone" placeholder="05XX XXX XX XX" oninput="this.classList.remove('error')">
+                        </div>
+                        <div class="field">
+                            <label>Şehir</label>
+                            <select id="city">
+                                <option>İstanbul</option>
+                                <option>Ankara</option>
+                                <option>İzmir</option>
+                                <option>Bursa</option>
+                                <option>Antalya</option>
+                                <option>Aksaray</option>
+                                <option>Diğer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Payment Info -->
+                    <div class="checkout-form-card">
+                        <h2>💳 Kart Bilgileri</h2>
+
+                        <!-- Card Visual -->
+                        <div class="card-visual">
+                            <div class="card-chip"></div>
+                            <div class="card-number-display" id="cardNumDisplay">•••• •••• •••• ••••</div>
+                            <div class="card-bottom">
+                                <div>
+                                    <div class="label">Kart Sahibi</div>
+                                    <div class="value" id="cardNameDisplay">AD SOYAD</div>
+                                </div>
+                                <div>
+                                    <div class="label">Son Kullanma</div>
+                                    <div class="value" id="cardExpDisplay">AA/YY</div>
+                                </div>
+                                <div class="card-brand">VISA</div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Kart Numarası *</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"
+                                oninput="this.value=formatCardNumber(this.value);updateCardDisplay();this.classList.remove('error')">
+                        </div>
+                        <div class="field">
+                            <label>Kart Üzerindeki Ad *</label>
+                            <input type="text" id="cardName" placeholder="AD SOYAD"
+                                oninput="this.value=this.value.toUpperCase();updateCardDisplay();this.classList.remove('error')">
+                        </div>
+                        <div class="form-row">
+                            <div class="field">
+                                <label>Son Kullanma Tarihi *</label>
+                                <input type="text" id="expiry" placeholder="AA/YY" maxlength="5"
+                                    oninput="this.value=formatExpiry(this.value);updateCardDisplay();this.classList.remove('error')">
+                            </div>
+                            <div class="field">
+                                <label>CVV *</label>
+                                <input type="password" id="cvv" placeholder="•••" maxlength="3"
+                                    oninput="this.value=this.value.replace(/\D/g,'').slice(0,3);this.classList.remove('error')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary Column -->
+                <div class="order-col">
+                    <div class="order-summary">
+                        <h2>🧾 Sipariş Özeti</h2>
+                        ${orderItemsHTML}
+                        <hr class="summary-divider">
+                        <div class="summary-total-row"><span>Ara Toplam</span><span>${subtotal.toLocaleString('tr-TR')} ₺</span></div>
+                        <div class="summary-total-row"><span>KDV (%18)</span><span>${tax.toLocaleString('tr-TR')} ₺</span></div>
+                        <div class="summary-total-row grand-total"><span>Toplam</span><span>${total.toLocaleString('tr-TR')} ₺</span></div>
+                        <button class="btn-pay" id="payBtn" onclick="processPayment()">
+                            <span id="payBtnText">🔒 ${total.toLocaleString('tr-TR')} ₺ Öde</span>
+                            <div class="spinner" id="paySpinner"></div>
+                        </button>
+                        <div class="security-badges">
+                            <div class="badge">🔒 SSL Güvenli</div>
+                            <div class="badge">✅ 256-bit Şifreleme</div>
+                            <div class="badge">🛡️ 3D Secure</div>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCheckout);
+    </script>
+</body>
+</html>
