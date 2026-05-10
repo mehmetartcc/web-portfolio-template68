@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorilerim - Modern Portfolyo Sitesi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .fav-header {
+            padding: 8rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
+            color: white;
+        }
+        .fav-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .fav-header p { opacity: 0.9; font-size: 1.1rem; }
+
+        .fav-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--text-light);
+        }
+        .empty-state .empty-icon { font-size: 5rem; margin-bottom: 1rem; }
+        .empty-state h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--text); }
+        .empty-state p { margin-bottom: 2rem; }
+        .empty-state a {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: #EC4899;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .empty-state a:hover { opacity: 0.85; }
+
+        .fav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .fav-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .fav-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .fav-card-image {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .fav-card-body {
+            padding: 1.25rem;
+        }
+        .fav-card-body h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text);
+        }
+        .fav-card-body .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #EC4899;
+            margin-bottom: 1rem;
+        }
+
+        .fav-card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+        .btn-add-cart {
+            padding: 0.7rem;
+            background: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+        }
+        .btn-add-cart:hover { opacity: 0.85; }
+        .btn-add-cart.in-cart {
+            background: #10B981;
+        }
+        .btn-remove-fav {
+            padding: 0.7rem;
+            background: #FEE2E2;
+            color: #DC2626;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .btn-remove-fav:hover { background: #FECACA; }
+
+        .fav-summary {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .fav-summary .total-info h3 {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+        .fav-summary .total-info .total-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #EC4899;
+        }
+        .btn-add-all-cart {
+            padding: 0.9rem 2rem;
+            background: #10B981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+        .btn-add-all-cart:hover { opacity: 0.85; }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            max-width: 320px;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast.success { background: #10B981; }
+        .toast.info { background: #EC4899; }
+        .toast.warning { background: #F59E0B; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                <span>Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="projects.html">Projeler</a></li>
+                <li><a href="about.html">Hakkında</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="favorites.html" style="position: relative; background: #EC4899; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    ❤️ Favoriler <span id="fav-count" style="display:none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; background: #10B981; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    🛒 Sepet <span id="cart-count" style="display:none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Karanlık/Aydınlık Mod">🌓</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="fav-header">
+        <h1>❤️ Favori Projelerim</h1>
+        <p>Beğendiğiniz projeleri buradan takip edin ve sepete ekleyin</p>
+    </div>
+
+    <!-- Content -->
+    <section class="fav-section">
+        <div id="fav-container"></div>
+    </section>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio</h3>
+                <p>Mehmet Artuç - Bilgisayar Programcılığı Öğrencisi</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="projects.html">Projeler</a></li>
+                    <li><a href="about.html">Hakkında</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="https://github.com/mehmetartcc" class="social-link" title="GitHub">G</a>
+                    <a href="#" class="social-link" title="LinkedIn">L</a>
+                    <a href="#" class="social-link" title="Twitter">T</a>
+                    <a href="mailto:mehmetartuc2006@gmail.com" class="social-link" title="Email">E</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mehmet Artuç. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const projectImages = {
+            1: { bg: 'linear-gradient(135deg, #2563EB, #60A5FA)', emoji: '🛒' },
+            2: { bg: 'linear-gradient(135deg, #A855F7, #D946EF)', emoji: '✅' },
+            3: { bg: 'linear-gradient(135deg, #10B981, #34D399)', emoji: '📊' },
+            4: { bg: 'linear-gradient(135deg, #EC4899, #F472B6)', emoji: '👥' },
+            5: { bg: 'linear-gradient(135deg, #F59E0B, #FBBF24)', emoji: '🎨' },
+            6: { bg: 'linear-gradient(135deg, #6366F1, #818CF8)', emoji: '📝' }
+        };
+
+        function showToast(msg, type = 'success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast ${type} show`;
+            setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        function renderFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+            const cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const container = document.getElementById('fav-container');
+
+            updateBadges();
+
+            if (favorites.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">💔</div>
+                        <h2>Henüz favori proje yok</h2>
+                        <p>Projeler sayfasına gidin ve beğendiklerinizi favorilere ekleyin.</p>
+                        <a href="projects.html">🔍 Projelere Git</a>
+                    </div>`;
+                return;
+            }
+
+            const total = favorites.reduce((sum, p) => sum + p.price, 0);
+
+            const grid = favorites.map(p => {
+                const img = projectImages[p.id] || { bg: 'linear-gradient(135deg, #888, #aaa)', emoji: '📦' };
+                const inCart = cart.some(c => c.id === p.id);
+                return `
+                    <div class="fav-card" id="fav-card-${p.id}">
+                        <div class="fav-card-image" style="background: ${img.bg};">${img.emoji}</div>
+                        <div class="fav-card-body">
+                            <h3>${p.name}</h3>
+                            <div class="price">${p.price.toLocaleString('tr-TR')} ₺</div>
+                            <div class="fav-card-actions">
+                                <button class="btn-add-cart ${inCart ? 'in-cart' : ''}" onclick="toggleCart(${p.id}, '${p.name}', ${p.price})" id="cart-btn-${p.id}">
+                                    ${inCart ? '✓ Sepette' : '🛒 Sepete Ekle'}
+                                </button>
+                                <button class="btn-remove-fav" onclick="removeFavorite(${p.id})">❌ Kaldır</button>
+                            </div>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="fav-grid">${grid}</div>
+                <div class="fav-summary">
+                    <div class="total-info">
+                        <h3>${favorites.length} favori proje</h3>
+                        <div class="total-price">${total.toLocaleString('tr-TR')} ₺</div>
+                    </div>
+                    <button class="btn-add-all-cart" onclick="addAllToCart()">🛒 Tümünü Sepete Ekle</button>
+                </div>`;
+        }
+
+        function removeFavorite(id) {
+            let favorites = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+            favorites = favorites.filter(p => p.id !== id);
+            localStorage.setItem('projectFavorites', JSON.stringify(favorites));
+            showToast('Favorilerden kaldırıldı', 'warning');
+            renderFavorites();
+        }
+
+        function toggleCart(id, name, price) {
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const idx = cart.findIndex(p => p.id === id);
+            if (idx === -1) {
+                cart.push({ id, name, price });
+                localStorage.setItem('projectCart', JSON.stringify(cart));
+                showToast(`"${name}" sepete eklendi! 🛒`, 'success');
+            } else {
+                cart.splice(idx, 1);
+                localStorage.setItem('projectCart', JSON.stringify(cart));
+                showToast(`"${name}" sepetten çıkarıldı`, 'warning');
+            }
+            renderFavorites();
+        }
+
+        function addAllToCart() {
+            const favorites = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            let added = 0;
+            favorites.forEach(p => {
+                if (!cart.some(c => c.id === p.id)) {
+                    cart.push(p);
+                    added++;
+                }
+            });
+            localStorage.setItem('projectCart', JSON.stringify(cart));
+            showToast(added > 0 ? `${added} proje sepete eklendi! 🎉` : 'Tüm projeler zaten sepette ✓', added > 0 ? 'success' : 'info');
+            renderFavorites();
+        }
+
+        function updateBadges() {
+            const favs = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+            const cartItems = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const favCount = document.getElementById('fav-count');
+            const cartCount = document.getElementById('cart-count');
+            favCount.textContent = favs.length;
+            favCount.style.display = favs.length > 0 ? 'flex' : 'none';
+            cartCount.textContent = cartItems.length;
+            cartCount.style.display = cartItems.length > 0 ? 'flex' : 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', renderFavorites);
+    </script>
+</body>
+</html>

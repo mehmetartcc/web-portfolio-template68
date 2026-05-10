@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepetim - Modern Portfolyo Sitesi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .cart-header {
+            padding: 8rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            color: white;
+        }
+        .cart-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .cart-header p { opacity: 0.9; font-size: 1.1rem; }
+
+        .cart-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .cart-section { grid-template-columns: 1fr; }
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--text-light);
+        }
+        .empty-state .empty-icon { font-size: 5rem; margin-bottom: 1rem; }
+        .empty-state h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--text); }
+        .empty-state p { margin-bottom: 2rem; }
+        .empty-state a {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: #10B981;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .empty-state a:hover { opacity: 0.85; }
+
+        /* Cart Items */
+        .cart-items { display: flex; flex-direction: column; gap: 1rem; }
+
+        .cart-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: box-shadow 0.2s;
+        }
+        .cart-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info { flex: 1; }
+        .cart-item-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+        .cart-item-info .item-price { font-size: 1.3rem; font-weight: 800; color: #10B981; }
+
+        .btn-remove-cart {
+            padding: 0.55rem 1rem;
+            background: #FEE2E2;
+            color: #DC2626;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .btn-remove-cart:hover { background: #FECACA; }
+
+        /* Order Summary */
+        .order-summary {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 5rem;
+        }
+        .order-summary h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text); }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        .summary-row:last-of-type { border-bottom: none; }
+        .summary-row.total {
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .summary-row.total span:last-child { color: #10B981; font-size: 1.4rem; }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-top: 1.5rem;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .btn-checkout:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .btn-continue {
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            transition: background 0.2s;
+        }
+        .btn-continue:hover { background: var(--bg); }
+
+        .security-info {
+            margin-top: 1.25rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        .security-info span { display: block; margin-bottom: 0.2rem; }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: #10B981; }
+        .toast.warning { background: #F59E0B; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                <span>Portfolio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="projects.html">Projeler</a></li>
+                <li><a href="about.html">Hakkında</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="favorites.html" style="position: relative; background: #EC4899; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    ❤️ Favoriler <span id="fav-count" style="display:none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <a href="cart.html" style="position: relative; background: #10B981; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;">
+                    🛒 Sepet <span id="cart-count" style="display:none; position: absolute; top: -8px; right: -8px; background: #DC2626; color: white; border-radius: 50%; width: 24px; height: 24px; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;">0</span>
+                </a>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Karanlık/Aydınlık Mod">🌓</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="cart-header">
+        <h1>🛒 Sepetim</h1>
+        <p>Satın almak istediğiniz projeleri gözden geçirin</p>
+    </div>
+
+    <!-- Content -->
+    <section class="cart-section" id="cart-section"></section>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio</h3>
+                <p>Mehmet Artuç - Bilgisayar Programcılığı Öğrencisi</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hızlı Bağlantılar</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="projects.html">Projeler</a></li>
+                    <li><a href="about.html">Hakkında</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Sosyal Medya</h3>
+                <div class="social-links">
+                    <a href="https://github.com/mehmetartcc" class="social-link" title="GitHub">G</a>
+                    <a href="#" class="social-link" title="LinkedIn">L</a>
+                    <a href="#" class="social-link" title="Twitter">T</a>
+                    <a href="mailto:mehmetartuc2006@gmail.com" class="social-link" title="Email">E</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mehmet Artuç. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const projectImages = {
+            1: { bg: 'linear-gradient(135deg, #2563EB, #60A5FA)', emoji: '🛒' },
+            2: { bg: 'linear-gradient(135deg, #A855F7, #D946EF)', emoji: '✅' },
+            3: { bg: 'linear-gradient(135deg, #10B981, #34D399)', emoji: '📊' },
+            4: { bg: 'linear-gradient(135deg, #EC4899, #F472B6)', emoji: '👥' },
+            5: { bg: 'linear-gradient(135deg, #F59E0B, #FBBF24)', emoji: '🎨' },
+            6: { bg: 'linear-gradient(135deg, #6366F1, #818CF8)', emoji: '📝' }
+        };
+
+        function showToast(msg, type = 'success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast ${type} show`;
+            setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        function updateBadges() {
+            const favs = JSON.parse(localStorage.getItem('projectFavorites')) || [];
+            const cartItems = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const favCount = document.getElementById('fav-count');
+            const cartCount = document.getElementById('cart-count');
+            favCount.textContent = favs.length;
+            favCount.style.display = favs.length > 0 ? 'flex' : 'none';
+            cartCount.textContent = cartItems.length;
+            cartCount.style.display = cartItems.length > 0 ? 'flex' : 'none';
+        }
+
+        function removeFromCart(id) {
+            let cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            cart = cart.filter(p => p.id !== id);
+            localStorage.setItem('projectCart', JSON.stringify(cart));
+            showToast('Ürün sepetten kaldırıldı', 'warning');
+            renderCart();
+        }
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            const section = document.getElementById('cart-section');
+            updateBadges();
+
+            if (cart.length === 0) {
+                section.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🛒</div>
+                        <h2>Sepetiniz boş</h2>
+                        <p>Projeler sayfasına giderek beğendiklerinizi sepete ekleyebilirsiniz.</p>
+                        <a href="projects.html">🔍 Projelere Git</a>
+                    </div>`;
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, p) => sum + p.price, 0);
+            const tax = Math.round(subtotal * 0.18);
+            const total = subtotal + tax;
+
+            const itemsHTML = cart.map(p => {
+                const img = projectImages[p.id] || { bg: 'linear-gradient(135deg, #888, #aaa)', emoji: '📦' };
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-image" style="background: ${img.bg};">${img.emoji}</div>
+                        <div class="cart-item-info">
+                            <h3>${p.name}</h3>
+                            <div class="item-price">${p.price.toLocaleString('tr-TR')} ₺</div>
+                        </div>
+                        <button class="btn-remove-cart" onclick="removeFromCart(${p.id})">❌ Kaldır</button>
+                    </div>`;
+            }).join('');
+
+            section.innerHTML = `
+                <div class="cart-items">${itemsHTML}</div>
+                <div class="order-summary">
+                    <h2>📋 Sipariş Özeti</h2>
+                    <div class="summary-row"><span>Ara Toplam</span><span>${subtotal.toLocaleString('tr-TR')} ₺</span></div>
+                    <div class="summary-row"><span>KDV (%18)</span><span>${tax.toLocaleString('tr-TR')} ₺</span></div>
+                    <div class="summary-row total"><span>Toplam</span><span>${total.toLocaleString('tr-TR')} ₺</span></div>
+                    <button class="btn-checkout" onclick="goToCheckout()">💳 Ödemeye Geç</button>
+                    <a href="projects.html" class="btn-continue">← Alışverişe Devam Et</a>
+                    <div class="security-info">
+                        <span>🔒 Güvenli ödeme</span>
+                        <span>256-bit SSL şifreleme</span>
+                    </div>
+                </div>`;
+        }
+
+        function goToCheckout() {
+            const cart = JSON.parse(localStorage.getItem('projectCart')) || [];
+            if (cart.length === 0) return;
+            window.location.href = 'checkout.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</body>
+</html>
